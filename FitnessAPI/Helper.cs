@@ -39,5 +39,19 @@ namespace FitnessAPI
                 DailyUsages = ticket.DailyUsages
             };
         }
+
+        public static EntryDto EntryMapToDto(this Entry entry)
+        {
+            return new EntryDto
+            {
+                Id = entry.Id,
+                ClientId = entry.ClientId,
+                TicketId = entry.TicketId,
+                Date = entry.Date,
+                InsertedById = entry.InsertedById,
+                Barcode = entry.Barcode,
+                RoomId = entry.RoomId
+            };
+        }
     }
 }

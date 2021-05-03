@@ -40,7 +40,7 @@ namespace FitnessAPI.Controllers
             return client.MapToDto();
         }
 
-        //Post/Client
+        // Post/Client
         [HttpPost]
         public async Task<ActionResult<ClientDto>> CreateClientAsync(CreateClientDto clientDto)
         {
@@ -62,7 +62,7 @@ namespace FitnessAPI.Controllers
             return CreatedAtAction(nameof(CreateClientAsync), new { id = client.Id }, client.MapToDto());
         }
 
-        //PUT/Client/{id}
+        // Put/Client/{id}
         [HttpPut("id")]
         public async Task<ActionResult<ClientDto>> UpdateClientAsync(Guid id, UpdateClientDto clientDto)
         {
@@ -88,7 +88,7 @@ namespace FitnessAPI.Controllers
             return NoContent();
         }
 
-        //Delete/Client{id}
+        // Delete/Client{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteClientAsync(Guid id)
         {

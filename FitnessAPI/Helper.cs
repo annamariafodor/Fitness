@@ -22,5 +22,22 @@ namespace FitnessAPI
                 Comment = client.Comment
             };
         }
+
+        public static TicketTypeDto TicketTypeMapToDto(this TicketType ticket)
+        {
+            return new TicketTypeDto
+            {
+                Id = ticket.Id,
+                Name = ticket.Name,
+                Price = ticket.Price,
+                DayLimit = ticket.DayLimit,
+                EntryLimit = ticket.EntryLimit,
+                IsDeleted = ticket.IsDeleted,
+                RoomId = ticket.RoomId,
+                HoursFrom = ticket.HoursFrom,
+                HoursTo = ticket.HoursTo,
+                DailyUsages = ticket.DailyUsages
+            };
+        }
     }
-} 
+}

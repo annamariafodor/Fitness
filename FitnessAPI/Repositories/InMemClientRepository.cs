@@ -107,5 +107,24 @@ namespace FitnessAPI.Repositories
             return await Task.FromResult(client);
         }
 
+        public async Task CreateClientAsync(Client client)
+        {
+            clients.Add(client);
+            await Task.CompletedTask;
+        }
+
+        public async Task UpdateClientAsync(Client client)
+        {
+            var index = clients.FindIndex(existingItem => existingItem.Id == client.Id);
+            clients[index] = client;
+            await Task.CompletedTask;
+        }
+
+        public async Task DeleteClientAsync(Guid id)
+        {
+            var index = clients.FindIndex(existingItem => existingItem.Id == id);
+            clients.RemoveAt(index);
+            await Task.CompletedTask;
+        }
     }
-} 
+}

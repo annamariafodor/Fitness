@@ -28,6 +28,7 @@ namespace FitnessAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IInMemClientRepository, InMemClientRepository>();
+            services.AddControllers(options => { options.SuppressAsyncSuffixInActionNames = false; });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

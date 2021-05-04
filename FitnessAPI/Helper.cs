@@ -70,5 +70,15 @@ namespace FitnessAPI
                 RoomId = clientTicket.RoomId
             };
         }
+
+        public static RoomDto RoomMapToDto(this Room room)
+        {
+            return new RoomDto
+            {
+                Id = room.Id,
+                Name = room.Name,
+                IsDeleted = room.IsDeleted
+            };
+        }
     }
 }

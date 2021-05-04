@@ -53,5 +53,22 @@ namespace FitnessAPI
                 RoomId = entry.RoomId
             };
         }
+
+        public static ClientTicketDto ClientTicketMapToDto(this ClientTicket clientTicket)
+        {
+            return new ClientTicketDto
+            {
+                Id = clientTicket.Id,
+                ClientId = clientTicket.ClientId,
+                TicketTypeId = clientTicket.TicketTypeId,
+                BuyingDate = clientTicket.BuyingDate,
+                Barcode = clientTicket.Barcode,
+                EntryCount = clientTicket.EntryCount,
+                BuyingPrice = clientTicket.BuyingPrice,
+                AvalabileDate = clientTicket.AvalabileDate,
+                FirstUsageDate = clientTicket.FirstUsageDate,
+                RoomId = clientTicket.RoomId
+            };
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FitnessAPI.Dtos;
 using FitnessAPI.Entities;
 using FitnessAPI.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessAPI.Controllers
@@ -21,6 +22,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/Clients
+        [EnableCors("mySpecificOrigins")]
         [HttpGet]
         public async Task<IEnumerable<ClientDto>> GetClientsAsync()
         {
@@ -29,6 +31,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/Client/{id}
+        [EnableCors("mySpecificOrigins")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ClientDto>> GetClientAsync(Guid id)
         {
@@ -41,6 +44,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Post/Client
+        [EnableCors("mySpecificOrigins")]
         [HttpPost]
         public async Task<ActionResult<ClientDto>> CreateClientAsync(CreateClientDto clientDto)
         {
@@ -63,7 +67,8 @@ namespace FitnessAPI.Controllers
         }
 
         // Put/Client/{id}
-        [HttpPut("id")]
+        [EnableCors("mySpecificOrigins")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ClientDto>> UpdateClientAsync(Guid id, UpdateClientDto clientDto)
         {
             var existingItem = await repository.GetClientAsync(id);
@@ -89,6 +94,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Delete/Client{id}
+        [EnableCors("mySpecificOrigins")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteClientAsync(Guid id)
         {

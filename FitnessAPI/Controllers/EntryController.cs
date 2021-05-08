@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FitnessAPI.Dtos;
 using FitnessAPI.Entities;
 using FitnessAPI.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessAPI.Controllers
@@ -21,6 +22,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/Entries
+        [EnableCors("mySpecificOrigins")]
         [HttpGet]
         public async Task<IEnumerable<EntryDto>> GetEntriesAsync()
         {
@@ -29,6 +31,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/Entry/{id}
+        [EnableCors("mySpecificOrigins")]
         [HttpGet("{id}")]
         public async Task<ActionResult<EntryDto>> GetEntryAsync(Guid id)
         {
@@ -41,6 +44,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Post/Entry
+        [EnableCors("mySpecificOrigins")]
         [HttpPost]
         public async Task<ActionResult<EntryDto>> CreateEnrtyAsync(CreateEntryDto entryDto)
         {

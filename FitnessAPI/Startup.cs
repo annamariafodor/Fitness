@@ -17,6 +17,7 @@ namespace FitnessAPI
 {
     public class Startup
     {
+        readonly string MySpecificOrigins = "mySpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +28,15 @@ namespace FitnessAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MySpecificOrigins, builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
             services.AddSingleton<IInMemClientRepository, InMemClientRepository>();
             services.AddSingleton<IInMemTicketTypeRepository, InMemTicketTypeRepository>();
             services.AddSingleton<IInMemEntryRepository, InMemEntryRepository>();
@@ -53,6 +63,8 @@ namespace FitnessAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

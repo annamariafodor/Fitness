@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FitnessAPI.Dtos;
 using FitnessAPI.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessAPI.Controllers
@@ -20,6 +21,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/Rooms
+        [EnableCors("mySpecificOrigins")]
         [HttpGet]
         public async Task<IEnumerable<RoomDto>> GetItemsAsync()
         {
@@ -28,6 +30,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/Room/{id}
+        [EnableCors("mySpecificOrigins")]
         [HttpGet("{id}")]
         public async Task<ActionResult<RoomDto>> GetItemAsync(Guid id)
         {

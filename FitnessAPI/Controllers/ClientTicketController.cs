@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FitnessAPI.Dtos;
 using FitnessAPI.Entities;
 using FitnessAPI.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessAPI.Controllers
@@ -21,6 +22,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/ClientTickets
+        [EnableCors("mySpecificOrigins")]
         [HttpGet]
         public async Task<IEnumerable<ClientTicketDto>> GetClientTicketsAsync()
         {
@@ -29,6 +31,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Get/ClientTicket/{id}
+        [EnableCors("mySpecificOrigins")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ClientTicketDto>> GetClientTicketAsync(Guid id)
         {
@@ -41,6 +44,7 @@ namespace FitnessAPI.Controllers
         }
 
         // Post/ClientTicket
+        [EnableCors("mySpecificOrigins")]
         [HttpPost]
         public async Task<ActionResult<ClientTicketDto>> CreateClientTicketAsync(CreateClientTicketDto clientTicketDto)
         {
@@ -63,7 +67,8 @@ namespace FitnessAPI.Controllers
         }
 
         // PUT/ClientTicket/{id}
-        [HttpPut("id")]
+        [EnableCors("mySpecificOrigins")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ClientTicketDto>> UpdateClientTicketAsync(Guid id, UpdateClientTicketDto clientTicketDto)
         {
             var existingItem = await repository.GetClientTicketAsync(id);

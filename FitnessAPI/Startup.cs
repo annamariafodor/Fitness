@@ -42,6 +42,7 @@ namespace FitnessAPI
             services.AddSingleton<IInMemEntryRepository, InMemEntryRepository>();
             services.AddSingleton<IInMemClientTicketRepository, InMemClientTicketRepository>();
             services.AddSingleton<IInMemRoomRepository, InMemRoomRepository>();
+            services.AddSingleton<IInMemUserRepository,InMemUserRepository>();
             services.AddControllers(options => { options.SuppressAsyncSuffixInActionNames = false; });
             services.AddControllers();
             services.AddSwaggerGen(c =>

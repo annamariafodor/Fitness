@@ -9,7 +9,7 @@ namespace FitnessAPI.Dtos{
         [Required]
         public string Email { get; init; }
         [Required]
-        public int IsDeleted { get; init; }
+        public bool IsDeleted { get; init; }
         [Required]
         public string Photo { get; init; }
         [Required]

@@ -7,7 +7,7 @@ namespace FitnessAPI.Dtos{
         public double Price { get; init; }
         public int DayLimit { get; init; }
         public int EntryLimit { get; init; }
-        public int IsDeleted { get; init; }
+        public bool IsDeleted { get; init; }
         public int RoomId { get; init; }
         public String HoursFrom { get; init; }
         public String HoursTo { get; init; }

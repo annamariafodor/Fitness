@@ -8,7 +8,7 @@ namespace FitnessAPI.Entities
         public string Name { get; init; }
         public int Telephone { get; init; }
         public string Email { get; init; }
-        public int IsDeleted { get; init; }
+        public bool IsDeleted { get; init; }
         public string Photo { get; init; }
         public DateTimeOffset InsertedDate { get; init; }
         public int CNP { get; init; }
@@ -17,4 +17,4 @@ namespace FitnessAPI.Entities
         public string Comment { get; init; }
     }
 
-} 
+}

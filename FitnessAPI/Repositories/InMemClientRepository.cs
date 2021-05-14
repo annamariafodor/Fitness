@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,8 @@ namespace FitnessAPI.Repositories
                 Id = Guid.NewGuid(),
                 Name = "Nagy Bela",
                 Telephone = 0712345678,
-                Email = "bela@gmai.com",
-                IsDeleted = 0,
+                Email = "bela@gmail.com",
+                IsDeleted = false,
                 Photo = "",
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = 1789542103,
@@ -30,7 +31,7 @@ namespace FitnessAPI.Repositories
                 Name = "Kis Kata",
                 Telephone = 0787654321,
                 Email = "kata@gmail.com",
-                IsDeleted = 0,
+                IsDeleted = false,
                 Photo = "",
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = 1984653,
@@ -44,7 +45,7 @@ namespace FitnessAPI.Repositories
                 Name = "Kovacs Sandor",
                 Telephone = 078523147,
                 Email = "sandor@gmail.com",
-                IsDeleted = 1,
+                IsDeleted = false,
                 Photo = "",
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = 149465313,
@@ -58,7 +59,7 @@ namespace FitnessAPI.Repositories
                 Name = "Nagy Katalin",
                 Telephone = 0796325874,
                 Email = "katalin@gmail.com",
-                IsDeleted = 1,
+                IsDeleted = true,
                 Photo = "",
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = 26749641,
@@ -72,7 +73,7 @@ namespace FitnessAPI.Repositories
                 Name = "Szabo Janos",
                 Telephone = 0798541648,
                 Email = "janos@gmail.com",
-                IsDeleted = 0,
+                IsDeleted = false,
                 Photo = "",
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = 19645469,
@@ -86,14 +87,28 @@ namespace FitnessAPI.Repositories
                 Name = "Balog Ferenc",
                 Telephone = 074894631,
                 Email = "ferenc@gmail.com",
-                IsDeleted = 0,
+                IsDeleted = false,
                 Photo = "",
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = 1974656,
                 Adress = "Mucsarocsoge 44",
                 Barcode = 77454649,
                 Comment = ""
-            }
+            },
+            new Client
+            {
+                Id = Guid.NewGuid(),
+                Name = "Fodor Annamaria",
+                Telephone = 0712345879,
+                Email = "admin@gmail.com",
+                IsDeleted = false,
+                Photo = "",
+                InsertedDate = DateTimeOffset.UtcNow,
+                CNP = 1789542103,
+                Adress = "Mucsarocsoge 96",
+                Barcode = 65973698,
+                Comment = ""
+            },
         };
 
         public async Task<IEnumerable<Client>> GetClientsAsync()

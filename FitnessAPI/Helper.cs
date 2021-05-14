@@ -80,5 +80,16 @@ namespace FitnessAPI
                 IsDeleted = room.IsDeleted
             };
         }
+
+        public static UserDto UserMapToDto(this User user)
+        {
+            return new UserDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role
+            };
+        }
     }
 }

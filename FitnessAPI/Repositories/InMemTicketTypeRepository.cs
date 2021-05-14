@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace FitnessAPI.Repositories
                 Price = 50,
                 DayLimit = 30,
                 EntryLimit = 30,
-                IsDeleted = 0,
+                IsDeleted = false,
                 RoomId = 1,
                 HoursFrom = "9:00",
                 HoursTo = "21:00",
@@ -30,7 +31,7 @@ namespace FitnessAPI.Repositories
                 Price = 80,
                 DayLimit = 30,
                 EntryLimit = 60,
-                IsDeleted = 0,
+                IsDeleted = false,
                 RoomId = 2,
                 HoursFrom = "7:00",
                 HoursTo = "20:00",
@@ -43,7 +44,7 @@ namespace FitnessAPI.Repositories
                 Price = 100,
                 DayLimit = 50,
                 EntryLimit = 80,
-                IsDeleted = 0,
+                IsDeleted = false,
                 RoomId = 3,
                 HoursFrom = "6:00",
                 HoursTo = "23:00",

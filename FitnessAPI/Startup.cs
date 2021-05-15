@@ -34,7 +34,8 @@ namespace FitnessAPI
                 {
                     builder.WithOrigins("http://localhost:3000")
                            .AllowAnyHeader()
-                           .AllowAnyMethod();
+                           .AllowAnyMethod()
+                           .AllowCredentials();
                 });
             });
             services.AddSingleton<IInMemClientRepository, InMemClientRepository>();

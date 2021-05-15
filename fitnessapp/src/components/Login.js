@@ -1,5 +1,6 @@
 import { Button, Form } from 'react-bootstrap'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
     const [hasAccount, setHasAccount] = useState(true);
@@ -20,12 +21,17 @@ const Login = (props) => {
                 <div className="btnContainer">
                     {hasAccount ? (
                         <>
-                            <Button variant="primary" onClick={() => props.handleLogin(props.user)}>Login</Button>
+                            <Link to={props.validUser ? "/main" : "/"}>
+                                {console.log(props.validUser)}
+                                <Button variant="primary" onClick={() => props.handleLogin(props.user)}>Login</Button>
+                            </Link>
                             <p onClick={() => setHasAccount(!hasAccount)}>Create account</p>
                         </>
                     ) : (
                         <>
-                            <Button variant="primary" onClick = {() => props.handleRegister(props.user)}>Register</Button>
+                            <Link to={props.validUser ? "/main" : "/"}>
+                                <Button variant="primary" onClick={() => props.handleRegister(props.user)}>Register</Button>
+                            </Link>
                             <p onClick={() => setHasAccount(!hasAccount)}>Log in</p>
                         </>
                     )

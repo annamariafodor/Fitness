@@ -1,4 +1,5 @@
 import { Navbar, Nav, Form, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
     return (
@@ -11,7 +12,9 @@ const Header = (props) => {
                     <Nav.Link href="#entries">Entries</Nav.Link>
                 </Nav>
                 <Form inline>
-                    <Button variant="outline-info" onClick = {() => props.handleLogOut()}>Log out</Button >
+                    <Link to="/">
+                        <Button variant="outline-info" onClick={() => props.handleLogOut()}>Log out</Button >
+                    </Link>
                 </Form>
             </Navbar>
         </div>
@@ -19,4 +22,3 @@ const Header = (props) => {
 }
 
 export default Header
-    

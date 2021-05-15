@@ -32,10 +32,23 @@ namespace FitnessAPI.Controllers
 
         // Get/Client/{id}
         [EnableCors("mySpecificOrigins")]
-        [HttpGet("{id}")]
+        [HttpGet("getClientAsync/{id}")]
         public async Task<ActionResult<ClientDto>> GetClientAsync(Guid id)
         {
             var client = await repository.GetClientAsync(id);
+            if (client is null)
+            {
+                return NotFound();
+            }
+            return client.MapToDto();
+        }
+
+        // Get/Client/{email}
+        [EnableCors("mySpecificOrigins")]
+        [HttpGet("getClientByEmailAsync/{email}")]
+        public async Task<ActionResult<ClientDto>> GetClientByEmailAsync(string email)
+        {
+            var client = await repository.GetClientByEmailAsync(email);
             if (client is null)
             {
                 return NotFound();

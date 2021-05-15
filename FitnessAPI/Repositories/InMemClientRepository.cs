@@ -141,5 +141,11 @@ namespace FitnessAPI.Repositories
             clients.RemoveAt(index);
             await Task.CompletedTask;
         }
+
+        public async Task<Client> GetClientByEmailAsync(string email)
+        {
+            var client = clients.Where(client => client.Email == email).SingleOrDefault();
+            return await Task.FromResult(client);
+        }
     }
 }

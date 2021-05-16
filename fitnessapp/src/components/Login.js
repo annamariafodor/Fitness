@@ -22,15 +22,15 @@ const Login = (props) => {
                     {hasAccount ? (
                         <>
                             <Link to={props.validUser ? "/main" : "/"}>
-                                {console.log(props.validUser)}
-                                <Button className="button" variant="primary" onClick={() => props.handleLogin(props.user)}>Login</Button>
+                                {/* {console.log("log2: ", props.validUser)} */}
+                                <Button className="button" variant="primary" onClick={() => props.handleLogin(props.user,)}>Login</Button>
                             </Link>
                             <p onClick={() => setHasAccount(!hasAccount)}>Create account</p>
                         </>
                     ) : (
                         <>
                             <Link to={props.validUser ? "/main" : "/"}>
-                                <Button variant="primary" onClick={() => props.handleRegister(props.user)}>Register</Button>
+                                <Button className="button" variant="primary" onClick={() => props.handleRegister(props.user)}>Register</Button>
                             </Link>
                             <p onClick={() => setHasAccount(!hasAccount)}>Log in</p>
                         </>

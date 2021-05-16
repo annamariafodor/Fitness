@@ -1,10 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { useState, useEffect } from 'react'
-import Header from './components/Header';
-import Login from './components/Login';
 import Registration from './pages/Registration';
 import Main from './pages/Main';
 
@@ -56,12 +53,8 @@ function App() {
     // check if the email already exist in users database
     let checkUser = users.filter(x => x.email === user.email)
 
-    console.log("checkClient: ", checkClient)
-    console.log("checkUser: ", checkUser)
-
     // if the email and password is valid 
     if (checkClient.length !== 0 && checkUser.length === 0 && user.password) {
-      console.log("request3: ")
       axios.post('https://localhost:5001/users', user).then((response) => {
         setUser(user)
         setValidUser(true)
@@ -82,7 +75,6 @@ function App() {
 
   return (
     <Router>
-      {console.log(validUser)}
       <Switch>
         <Route path="/" exact render={(props) =>
         (

@@ -1,7 +1,8 @@
 import { Navbar, Nav, Form, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const Header = (props) => {
+    let match = useRouteMatch();
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -10,14 +11,14 @@ const Header = (props) => {
                 </Link>
                 {props.user.role === "admin" ? (
                     <Nav className="mr-auto navbar_wrapper">
-                        <Link to="/clients">Clients</Link>
-                        <Link to="/tickets">Tickets</Link>
-                        <Link to="/entries">Entries</Link>
+                        <Link to={`${match.url}/clients`}>Clients</Link>
+                        <Link to={`${match.url}/tickets`}>Tickets</Link>
+                        <Link to={`${match.url}/entries`}>Entries</Link>
                     </Nav>
                 ) : (
                     <Nav className="mr-auto navbar_wrapper">
-                        <Link to="/tickets">My Tickets</Link>
-                        <Link to="/entries">My Entries</Link>
+                        <Link to={`${match.url}/tickets`}>My Tickets</Link>
+                        <Link to={`${match.url}/entries`}>My Entries</Link>
                     </Nav>
                 )}
 

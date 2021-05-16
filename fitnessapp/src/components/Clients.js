@@ -1,6 +1,5 @@
-import Header from './Header'
-import { Table, Button, Alert } from 'react-bootstrap'
-import React, { useState, useEffect } from 'react'
+import { Table, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 const Clients = (props) => {
@@ -31,7 +30,6 @@ const Clients = (props) => {
 
             axios.post('https://localhost:5001/clients', client)
                 .then(response => {
-                    console.log(response.data)
                     getClients()
                 })
                 .catch(error => {

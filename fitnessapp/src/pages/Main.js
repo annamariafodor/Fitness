@@ -11,7 +11,7 @@ const Main = (props) => {
     const { handleLogOut, user, setUser, clients, getClients } = props
     return (
         <Router>
-            <Header handleLogOut={handleLogOut} user={user}/>
+            <Header handleLogOut={handleLogOut} user={user} />
             {user.role === "admin" ? (
                 <>
                     <Route path="/clients" render={(props) => <Clients user={user} setUser={setUser} clients={clients} getClients={getClients}/>} />

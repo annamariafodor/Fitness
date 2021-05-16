@@ -21,20 +21,6 @@ namespace FitnessAPI.Repositories
             new User
             {
                 Id = Guid.NewGuid(),
-                Email = "kata@gmail.com",
-                Password = "password",
-                Role = "client"
-            },
-            new User
-            {
-                Id = Guid.NewGuid(),
-                Email = "sandor@gmail.com",
-                Password = "password",
-                Role = "client"
-            },
-            new User
-            {
-                Id = Guid.NewGuid(),
                 Email = "admin@gmail.com",
                 Password = "admin",
                 Role = "admin"

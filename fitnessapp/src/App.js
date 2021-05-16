@@ -20,27 +20,34 @@ function App() {
     getUsers()
   }, [])
 
-  let getClients = () => {
+  const getClients = () => {
     axios.get('https://localhost:5001/clients').then((response) => {
       setClients(response.data)
     }).catch((error) => { console.log("getClients error", error) });
   }
 
-  let getUsers = () => {
+  const getUsers = () => {
     axios.get('https://localhost:5001/users').then((response) => {
       setUsers(response.data)
     }).catch((error) => { console.log("getUsers error", error) });
   }
 
   const handleLogin = (user) => {
-    axios.get('https://localhost:5001/users/GetUserByEmailAsync/' + user.email).then((response) => {
-      if (user.password === response.data.password) {
-        setValidUser(true)
-        setUser(response.data)
-      } else {
-        setValidUser(false)
-      }
-    }).catch((error) => { console.log("Login error", error) });
+    if (!user.email || !user.password) {
+      alert("Missing datas!")
+    }
+    else {
+      axios.get('https://localhost:5001/users/GetUserByEmailAsync/' + user.email).then((response) => {
+        if (user.password === response.data.password) {
+          setValidUser(true)
+          setUser(response.data)
+        } else {
+          setValidUser(false)
+          alert("Wrong datas!")
+        }
+      }).catch((error) => { console.log("Login error", error) });
+    }
+
   }
 
   const handleRegister = (user) => {

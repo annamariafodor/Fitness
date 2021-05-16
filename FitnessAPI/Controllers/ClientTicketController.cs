@@ -43,6 +43,7 @@ namespace FitnessAPI.Controllers
             return clientTicket.ClientTicketMapToDto();
         }
 
+        private readonly Random random = new Random();
         // Post/ClientTicket
         [EnableCors("mySpecificOrigins")]
         [HttpPost]
@@ -53,9 +54,9 @@ namespace FitnessAPI.Controllers
                 Id = Guid.NewGuid(),
                 ClientId = clientTicketDto.ClientId,
                 TicketTypeId = clientTicketDto.TicketTypeId,
-                BuyingDate = clientTicketDto.BuyingDate,
-                Barcode = clientTicketDto.Barcode,
-                EntryCount = clientTicketDto.EntryCount,
+                BuyingDate = DateTimeOffset.UtcNow,
+                Barcode = random.Next(100000, 999999),
+                EntryCount = 0,
                 BuyingPrice = clientTicketDto.BuyingPrice,
                 AvalabileDate = clientTicketDto.AvalabileDate,
                 FirstUsageDate = clientTicketDto.FirstUsageDate,

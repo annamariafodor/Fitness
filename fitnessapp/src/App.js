@@ -16,15 +16,21 @@ function App() {
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
+    getClients()
+    getUsers()
+  }, [])
+
+  let getClients = () => {
     axios.get('https://localhost:5001/clients').then((response) => {
       setClients(response.data)
-    }).catch((error) => { console.log("getClientByEmailAsync error", error) });
+    }).catch((error) => { console.log("getClients error", error) });
+  }
 
+  let getUsers = () => {
     axios.get('https://localhost:5001/users').then((response) => {
       setUsers(response.data)
-    }).catch((error) => { console.log("GetUserByEmailAsync error", error) });
-
-  }, [])
+    }).catch((error) => { console.log("getUsers error", error) });
+  }
 
   const handleLogin = (user) => {
     axios.get('https://localhost:5001/users/GetUserByEmailAsync/' + user.email).then((response) => {
@@ -64,7 +70,7 @@ function App() {
   }
 
   // if (!validUser) {
-  //   return <Registration user={user} setUser={setUser} handleLogin={handleLogin} handleRegister={handleRegister} validUser={validUser}/>
+  //   return <App user={user} setUser={setUser} handleLogin={handleLogin} handleRegister={handleRegister} validUser={validUser}/>
   // }
 
   return (
@@ -76,7 +82,13 @@ function App() {
           <Registration {...props} user={user} setUser={setUser} handleLogin={handleLogin} handleRegister={handleRegister} validUser={validUser} />
         )}
         />
-        <Route path="/main" render={(props) => <Main handleLogOut={handleLogOut} />} />
+        <Route path="/main" render={(props) =>
+        (
+          <>
+            <Main handleLogOut={handleLogOut} user={user} setUser={setUser} clients={clients} getClients={getClients} />
+          </>
+
+        )} />
       </Switch>
     </Router>
 

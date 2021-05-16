@@ -56,6 +56,7 @@ namespace FitnessAPI.Controllers
             return client.MapToDto();
         }
 
+        private readonly Random random = new Random();
         // Post/Client
         [EnableCors("mySpecificOrigins")]
         [HttpPost]
@@ -72,7 +73,7 @@ namespace FitnessAPI.Controllers
                 InsertedDate = DateTimeOffset.UtcNow,
                 CNP = clientDto.CNP,
                 Adress = clientDto.Adress,
-                Barcode = clientDto.Barcode,
+                Barcode = random.Next(100000, 999999),
                 Comment = clientDto.Comment
             };
             await repository.CreateClientAsync(client);

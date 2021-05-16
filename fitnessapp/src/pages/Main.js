@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
-import { Route, useRouteMatch, Switch } from 'react-router-dom'
+import { Route, useRouteMatch, Switch, Redirect } from 'react-router-dom'
 import Clients from '../components/Clients'
 import Tickets from '../components/Tickets'
 import Entries from '../components/Entries'
@@ -13,6 +13,7 @@ const Main = (props) => {
 
     return (
         <>
+            { user.length === 0 ? (<Redirect to="/" />) : null}
             <Header handleLogOut={handleLogOut} user={user} />
             <Switch>
                 {user.role === "admin" ? (

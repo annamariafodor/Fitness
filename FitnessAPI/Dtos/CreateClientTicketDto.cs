@@ -10,10 +10,6 @@ namespace FitnessAPI.Dtos
         [Required]
         public string TicketTypeId { get; init; }
         [Required]
-        public int Barcode { get; init; }
-        [Required]
-        public int EntryCount { get; init; }
-        [Required]
         public double BuyingPrice { get; init; }
         [Required]
         public DateTimeOffset AvalabileDate { get; init; }

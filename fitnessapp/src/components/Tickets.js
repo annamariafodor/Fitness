@@ -32,19 +32,16 @@ const Tickets = (props) => {
     }
 
     const getTicketTypes = () => {
-        axios.get('https://localhost:5001/tickettypes').then((response) => {
-            setTicketTypes(response.data)
-        }).catch((error) => { console.log("getTicketTypes error", error) });
+        axios.get('https://localhost:5001/tickettypes')
+            .then((response) => {
+                setTicketTypes(response.data)
+            }).catch((error) => {
+                console.log("getTicketTypes error", error)
+            });
     }
 
     const addNewClientTicket = () => {
         if (!client || !ticketType || !buyingPrice || !avalabileDate || !firstUsageDate || !roomId) {
-            console.log("client: ", client)
-            console.log("ticketType: ", ticketType)
-            console.log("buyingPrice: ", buyingPrice)
-            console.log("avalabileDate: ", avalabileDate)
-            console.log("firstUsageDate: ", firstUsageDate)
-            console.log("roomId: ", roomId)
             alert("Missing datas!")
         }
         else {
@@ -57,7 +54,6 @@ const Tickets = (props) => {
                 "roomId": roomId
             }
 
-            console.log(newTicket)
             axios.post('https://localhost:5001/clienttickets', newTicket)
                 .then(response => {
                     getClientTickets()
@@ -78,12 +74,18 @@ const Tickets = (props) => {
                     <form >
                         <label>
                             Client:
-                            <select onChange={(e) => setClient(e.target.value)}>{clients.map(client => <option key={client.id}>{client.email}</option>)}</select>
+                            <select onChange={(e) => setClient(e.target.value)}>
+                                <option selected disabled>Select client</option>
+                                {clients.map(client => <option key={client.id}>{client.email}</option>)}
+                            </select>
 
                         </label>
                         <label>
                             Ticket type:
-                            <select onChange={(e) => setTicketType(e.target.value)}>{ticketTypes.map(ticket => <option key={ticket.id}>{ticket.name}</option>)}</select>
+                            <select onChange={(e) => setTicketType(e.target.value)}>
+                                <option selected disabled>Select ticket</option>
+                                {ticketTypes.map(ticket => <option key={ticket.id}>{ticket.name}</option>)}
+                            </select>
                         </label>
                         <label>
                             Buying price:
@@ -120,11 +122,10 @@ const Tickets = (props) => {
                     </thead>
                     <tbody>
                         <tr className="row">
-                            {console.log("ticket: ", clientTickets)}
-                            {/* {clientTickets.map(ticket =>
+                            {clientTickets && ticketTypes && clientTickets.map(ticket =>
                                 <div key={ticket.id}>
-                                    <td>{ticket.clientId}</td>
-                                    <td>{ticket.ticketTypeId}</td>
+                                    <td>{clients.filter(x => x.id === ticket.clientId)[0].name}</td>
+                                    <td>{ticketTypes.filter(x => x.id === ticket.ticketTypeId)[0].name}</td>
                                     <td>{ticket.buyingDate.substring(0, ticket.buyingDate.length - 23)}</td>
                                     <td>{ticket.barcode}</td>
                                     <td>{ticket.entryCount}</td>
@@ -133,11 +134,10 @@ const Tickets = (props) => {
                                     <td>{ticket.firstUsageDate.substring(0, ticket.firstUsageDate.length - 23)}</td>
                                     <td>{ticket.roomId}</td>
                                 </div>
-                            )} */}
+                            )}
                         </tr>
                     </tbody>
                 </Table>
-
             </div>
         </div>
     )

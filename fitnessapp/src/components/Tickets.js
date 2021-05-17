@@ -106,24 +106,23 @@ const Tickets = (props) => {
                     </form>
                     <Button size="sm" className="saveButton" onClick={addNewClientTicket}>Save</Button>
                 </section>}
-                <Table>
+                <Table className='table table-striped'>
                     <thead>
-                        <tr className="row">
+                        <tr>
                             <th>Client</th>
                             <th>Ticket Type</th>
-                            <th>BuyingDate</th>
+                            <th>Buying Date</th>
                             <th>Barcode</th>
-                            <th>EntryCount</th>
-                            <th>BuyingPrice</th>
-                            <th>AvalabileDate</th>
-                            <th>FirstUsageDate</th>
+                            <th>Entry Count</th>
+                            <th>Buying Price</th>
+                            <th>Avalabile Date</th>
+                            <th>First Usage Date</th>
                             <th>RoomId</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="row">
                             {clientTickets && ticketTypes && clientTickets.map(ticket =>
-                                <div key={ticket.id}>
+                                <tr key={ticket.id}>
                                     <td>{clients.filter(x => x.id === ticket.clientId)[0].name}</td>
                                     <td>{ticketTypes.filter(x => x.id === ticket.ticketTypeId)[0].name}</td>
                                     <td>{ticket.buyingDate.substring(0, ticket.buyingDate.length - 23)}</td>
@@ -133,9 +132,8 @@ const Tickets = (props) => {
                                     <td>{ticket.avalabileDate.substring(0, ticket.avalabileDate.length - 23)}</td>
                                     <td>{ticket.firstUsageDate.substring(0, ticket.firstUsageDate.length - 23)}</td>
                                     <td>{ticket.roomId}</td>
-                                </div>
+                                </tr>
                             )}
-                        </tr>
                     </tbody>
                 </Table>
             </div>

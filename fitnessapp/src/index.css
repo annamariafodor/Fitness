@@ -115,39 +115,6 @@ code {
   font-size: 20px;
 }
 
-.table {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
-
-
-.table div {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-  justify-content: space-around;
-  padding: 5px;
-  align-items: center;
-}
-
-
-main {
-  display: flex;
-}
-
-.container-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
 
 .addButton-wrapper {
   color: #fff;
@@ -162,7 +129,7 @@ main {
   position: relative;
   left: 40%;
   top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .saveButton{
@@ -179,4 +146,12 @@ main {
 input {
   display: block;
   box-sizing: border-box;
+}
+
+.container-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

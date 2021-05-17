@@ -75,9 +75,9 @@ const Clients = (props) => {
                     </form>
                     <Button size="sm" onClick={saveClient} className="saveButton">Save</Button>
                 </section>}
-                <Table>
+                <Table className='table table-striped'>
                     <thead>
-                        <tr className="row">
+                        <tr>
                             <th>Name</th>
                             <th>Phone</th>
                             <th>Email</th>
@@ -88,9 +88,8 @@ const Clients = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="row">
                             {clients.map(client =>
-                                <div key={client.id}>
+                                <tr key={client.id}>
                                     <td>{client.name}</td>
                                     <td>{client.telephone}</td>
                                     <td>{client.email}</td>
@@ -98,9 +97,8 @@ const Clients = (props) => {
                                     <td>{client.cnp}</td>
                                     <td>{client.adress}</td>
                                     <td>{client.barcode}</td>
-                                </div>
+                                </tr>
                             )}
-                        </tr>
                     </tbody>
                 </Table>
 

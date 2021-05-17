@@ -17,5 +17,7 @@ namespace FitnessAPI.Dtos
         public DateTimeOffset FirstUsageDate { get; init; }
         [Required]
         public string RoomId { get; init; }
+        [Required]
+        public int Barcode { get; init; }
     }
 }

@@ -55,7 +55,7 @@ namespace FitnessAPI.Controllers
                 ClientId = clientTicketDto.ClientId,
                 TicketTypeId = clientTicketDto.TicketTypeId,
                 BuyingDate = DateTimeOffset.UtcNow,
-                Barcode = random.Next(100000, 999999),
+                Barcode = clientTicketDto.Barcode,
                 EntryCount = 0,
                 BuyingPrice = clientTicketDto.BuyingPrice,
                 AvalabileDate = clientTicketDto.AvalabileDate,

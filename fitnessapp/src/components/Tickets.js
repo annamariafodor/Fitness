@@ -13,8 +13,7 @@ const Tickets = (props) => {
     const [roomId, setRoomId] = useState();
     const [ticketTypes, setTicketTypes] = useState();
     const [clientTickets, setClientTickets] = useState();
-
-
+    const [barcode, setBarcode] = useState();
 
     useEffect(() => {
         getClientTickets()
@@ -41,7 +40,7 @@ const Tickets = (props) => {
     }
 
     const addNewClientTicket = () => {
-        if (!client || !ticketType || !buyingPrice || !avalabileDate || !firstUsageDate || !roomId) {
+        if (!client || !ticketType || !buyingPrice || !avalabileDate || !firstUsageDate || !barcode) {
             alert("Missing datas!")
         }
         else {
@@ -51,7 +50,8 @@ const Tickets = (props) => {
                 "buyingPrice": buyingPrice,
                 "avalabileDate": avalabileDate,
                 "firstUsageDate": firstUsageDate,
-                "roomId": roomId
+                "roomId": ticketTypes.filter(x => x.name === ticketType)[0].roomId.toString(),
+                "barcode": barcode
             }
 
             axios.post('https://localhost:5001/clienttickets', newTicket)
@@ -78,7 +78,13 @@ const Tickets = (props) => {
                                 <option selected disabled>Select client</option>
                                 {clients.map(client => <option key={client.id}>{client.email}</option>)}
                             </select>
-
+                        </label>
+                        <label>
+                            Ticket barcode:
+                            <select onChange={(e) => setBarcode(e.target.value)}>
+                                <option selected disabled>Select barcode</option>
+                                {(clients.filter(x => x.email === client)).map(x => <option key={x.id}>{x.barcode}</option>)}
+                            </select>
                         </label>
                         <label>
                             Ticket type:
@@ -99,10 +105,6 @@ const Tickets = (props) => {
                             First usage date:
                                     <input type="date" name="firstUsageDate" value={firstUsageDate} onChange={(e) => setFirstUsageDate(e.target.value)} />
                         </label>
-                        <label>
-                            Room Id:
-                                    <input type="number" name="roomId" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
-                        </label>
                     </form>
                     <Button size="sm" className="saveButton" onClick={addNewClientTicket}>Save</Button>
                 </section>}
@@ -121,19 +123,19 @@ const Tickets = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                            {clientTickets && ticketTypes && clientTickets.map(ticket =>
-                                <tr key={ticket.id}>
-                                    <td>{clients.filter(x => x.id === ticket.clientId)[0].name}</td>
-                                    <td>{ticketTypes.filter(x => x.id === ticket.ticketTypeId)[0].name}</td>
-                                    <td>{ticket.buyingDate.substring(0, ticket.buyingDate.length - 23)}</td>
-                                    <td>{ticket.barcode}</td>
-                                    <td>{ticket.entryCount}</td>
-                                    <td>{ticket.buyingPrice}</td>
-                                    <td>{ticket.avalabileDate.substring(0, ticket.avalabileDate.length - 23)}</td>
-                                    <td>{ticket.firstUsageDate.substring(0, ticket.firstUsageDate.length - 23)}</td>
-                                    <td>{ticket.roomId}</td>
-                                </tr>
-                            )}
+                        {clientTickets && ticketTypes && clientTickets.map(ticket =>
+                            <tr key={ticket.id}>
+                                <td>{clients.filter(x => x.id === ticket.clientId)[0].name}</td>
+                                <td>{ticketTypes.filter(x => x.id === ticket.ticketTypeId)[0].name}</td>
+                                <td>{ticket.buyingDate.substring(0, ticket.buyingDate.length - 23)}</td>
+                                <td>{ticket.barcode}</td>
+                                <td>{ticket.entryCount}</td>
+                                <td>{ticket.buyingPrice}</td>
+                                <td>{ticket.avalabileDate.substring(0, ticket.avalabileDate.length - 15)}</td>
+                                <td>{ticket.firstUsageDate.substring(0, ticket.firstUsageDate.length - 15)}</td>
+                                <td>{ticket.roomId}</td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
             </div>

@@ -24,8 +24,8 @@ const Main = (props) => {
                     </>
                 ) : (
                     <>
-                        <Route path={`${match.path}/tickets`} render={(props) => <MyTickets />} />
-                        <Route path={`${match.path}/entries`} render={(props) => <MyEntries />} />
+                        <Route path={`${match.path}/tickets`} render={(props) => <MyTickets user={user} setUser={setUser} clients={clients} getClients={getClients}/>} />
+                        <Route path={`${match.path}/entries`} render={(props) => <MyEntries user={user} setUser={setUser} clients={clients} getClients={getClients}/>} />
                     </>
                 )}
             </Switch>

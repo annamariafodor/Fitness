@@ -3,7 +3,7 @@ import { Table, Button } from 'react-bootstrap'
 import axios from 'axios'
 
 const Tickets = (props) => {
-    const { handleLogOut, user, setUser, clients, getClients } = props
+    const { clients } = props
     const [addForm, setAddForm] = useState(false);
     const [client, setClient] = useState();
     const [ticketType, setTicketType] = useState();
@@ -12,12 +12,14 @@ const Tickets = (props) => {
     const [firstUsageDate, setFirstUsageDate] = useState();
     const [roomId, setRoomId] = useState();
     const [ticketTypes, setTicketTypes] = useState();
+    const [rooms, setRooms] = useState();
     const [clientTickets, setClientTickets] = useState();
     const [barcode, setBarcode] = useState();
 
     useEffect(() => {
         getClientTickets()
         getTicketTypes()
+        getRooms()
     }, [])
 
     const getClientTickets = () => {
@@ -39,6 +41,16 @@ const Tickets = (props) => {
             });
     }
 
+    const getRooms = () => {
+        axios.get('https://localhost:5001/rooms')
+            .then(response => {
+                setRooms(response.data)
+            })
+            .catch(error => {
+                console.log("getRooms", error)
+            })
+    }
+
     const addNewClientTicket = () => {
         if (!client || !ticketType || !buyingPrice || !avalabileDate || !firstUsageDate || !barcode) {
             alert("Missing datas!")
@@ -50,7 +62,7 @@ const Tickets = (props) => {
                 "buyingPrice": buyingPrice,
                 "avalabileDate": avalabileDate,
                 "firstUsageDate": firstUsageDate,
-                "roomId": ticketTypes.filter(x => x.name === ticketType)[0].roomId.toString(),
+                "roomId": rooms.filter(x => x.name === roomId)[0].id,
                 "barcode": barcode
             }
 
@@ -94,6 +106,13 @@ const Tickets = (props) => {
                             </select>
                         </label>
                         <label>
+                            Room:
+                            <select onChange={(e) => setRoomId(e.target.value)}>
+                                <option selected disabled>Select room</option>
+                                {rooms.map(room => <option key={room.id}>{room.name}</option>)}
+                            </select>
+                        </label>
+                        <label>
                             Buying price:
                                     <input type="number" name="buyingPrice" value={buyingPrice} onChange={(e) => setBuyingPrice(e.target.value)} />
                         </label>
@@ -123,7 +142,7 @@ const Tickets = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {clientTickets && ticketTypes && clientTickets.map(ticket =>
+                        {clientTickets && ticketTypes && rooms && clientTickets.map(ticket =>
                             <tr key={ticket.id}>
                                 <td>{clients.filter(x => x.id === ticket.clientId)[0].name}</td>
                                 <td>{ticketTypes.filter(x => x.id === ticket.ticketTypeId)[0].name}</td>
@@ -133,7 +152,7 @@ const Tickets = (props) => {
                                 <td>{ticket.buyingPrice}</td>
                                 <td>{ticket.avalabileDate.substring(0, ticket.avalabileDate.length - 15)}</td>
                                 <td>{ticket.firstUsageDate.substring(0, ticket.firstUsageDate.length - 15)}</td>
-                                <td>{ticket.roomId}</td>
+                                <td>{rooms.filter(x => x.id === ticket.roomId)[0].name}</td>
                             </tr>
                         )}
                     </tbody>

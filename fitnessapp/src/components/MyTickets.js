@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap'
 import axios from 'axios'
 
 const MyTickets = (props) => {
-    const { handleLogOut, user, setUser, clients, getClients } = props
+    const { user, clients } = props
     const [myTickets, setMyTickets] = useState();
     const [ticketTypes, setTicketTypes] = useState();
     const [clientTickets, setClientTickets] = useState();

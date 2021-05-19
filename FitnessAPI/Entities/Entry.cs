@@ -10,6 +10,6 @@ namespace FitnessAPI.Entities
         public DateTimeOffset Date { get; init; }
         public string InsertedById { get; init; }
         public int Barcode { get; init; }
-        public int RoomId { get; init; }
+        public string RoomId { get; init; }
     }
 }

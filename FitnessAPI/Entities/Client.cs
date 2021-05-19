@@ -15,6 +15,8 @@ namespace FitnessAPI.Entities
         public string Adress { get; init; }
         public int Barcode { get; init; }
         public string Comment { get; init; }
+
+        public ClientTicket ClientTicket { get; init; }
     }
 
 }

@@ -13,6 +13,6 @@ namespace FitnessAPI.Dtos
         [Required]
         public int Barcode { get; init; }
         [Required]
-        public int RoomId { get; init; }
+        public string RoomId { get; init; }
     }
 }

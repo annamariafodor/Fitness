@@ -3,28 +3,34 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Entries = (props) => {
-    const { handleLogOut, user, setUser, clients, getClients } = props
+    const {  user, clients } = props
     const [addFormBarcode, setAddFormBarcode] = useState(false);
     const [addForm, setAddForm] = useState(false);
     const [client, setClient] = useState();
     const [ticket, setTicket] = useState();
-    const [date, setDate] = useState();
-    const [insertedBy, setInsertedBy] = useState();
     const [barcode, setBarcode] = useState();
-    const [roomId, setRoomId] = useState();
     const [entries, setEntries] = useState();
     const [clientTickets, setClientTickets] = useState();
     const [selectedTicket, setSelectedTicket] = useState();
     const [ticketTypes, setTicketTypes] = useState();
     const [rooms, setRooms] = useState();
     const [selectedRoom, setSelectedRoom] = useState();
+    const [users, setUsers] = useState([]);
+    const [successfulEntry, setSuccessfulEntry] = useState(false);
 
     useEffect(() => {
         getEntries()
         getClientTickets()
         getTicketTypes()
         getRooms()
+        getUsers()
     }, [])
+
+    const getUsers = () => {
+        axios.get('https://localhost:5001/users').then((response) => {
+            setUsers(response.data)
+        }).catch((error) => { console.log("getUsers error", error) });
+    }
 
     const getEntries = () => {
         axios.get('https://localhost:5001/entries')
@@ -66,7 +72,43 @@ const Entries = (props) => {
     }
 
     const newEntry = () => {
+        if (!selectedTicket || !selectedRoom || !barcode || !client) {
+            alert("Missing datas!")
+        }
+        else {
+            const newEntry = {
+                "clientId": client.id,
+                "ticketId": ticket.filter(x => x.ticketTypeId === ticketTypes.filter(x => x.name === selectedTicket)[0].id)[0].id,
+                "insertedById": user.id,
+                "barcode": barcode,
+                "roomId": rooms.filter(x => x.name === selectedRoom)[0].id
+            }
 
+            console.log("asd ", newEntry)
+
+            axios.post('https://localhost:5001/entries', newEntry)
+                .then(response => {
+                    getEntries()
+                })
+                .catch(error => {
+                    console.log("Entries post error", error)
+                })
+
+            const val = clientTickets.filter(x => x.barcode === parseInt(barcode))[0].entryCount
+            const updatedTicket = { ...clientTickets.filter(x => x.barcode === parseInt(barcode))[0], entryCount: val + 1 }
+
+            axios.put('https://localhost:5001/clienttickets/' + newEntry.ticketId, updatedTicket)
+                .then(response => {
+                    getEntries()
+                    getClientTickets()
+                })
+                .catch(error => {
+                    console.log("ticket put error", error)
+                })
+
+            setSuccessfulEntry(!successfulEntry)
+
+        }
     }
 
     const searchBarcode = () => {
@@ -118,11 +160,13 @@ const Entries = (props) => {
                         </label>
                         <label>
                             Room:
-                                    {/* <input type="number" name="roomId" value={roomId} onChange={(e) => setRoomId(e.target.value)} /> */}
                             <select onChange={(e) => setSelectedRoom(e.target.value)}>
                                 <option selected disabled>Select room</option>
-                                {(clientTickets.filter(x => x.barcode === parseInt(barcode))).map(ticket =>
-                                    <option key={ticket.id}>{rooms.filter(x => x.id === ticket.roomId)}</option>)}
+                                {selectedTicket && (rooms.filter(x => x.id === ((clientTickets.filter(
+                                    x => x.barcode === parseInt(barcode) &&
+                                        x.ticketTypeId === ticketTypes.filter(
+                                            x => x.name === selectedTicket)[0].id)[0].roomId)))).map(ticket =>
+                                                <option key={ticket.id}>{ticket.name}</option>)}
                             </select>
                         </label>
                     </form>
@@ -140,14 +184,14 @@ const Entries = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {entries && entries.map(enrty =>
-                            <tr key={enrty.id}>
-                                <td>{enrty.clientId}</td>
-                                <td>{enrty.ticketId}</td>
-                                <td>{enrty.date.substring(0, client.insertedDate.length - 23)}</td>
-                                <td>{enrty.insertedById}</td>
-                                <td>{enrty.barcode}</td>
-                                <td>{enrty.roomId}</td>
+                        {entries && users && rooms && ticketTypes && clientTickets && entries.map(entry =>
+                            <tr key={entry.id}>
+                                <td>{clients.filter(x => x.id === entry.clientId)[0].name}</td>
+                                <td>{ticketTypes.filter(x => x.id === clientTickets.filter(x => x.id === entry.ticketId)[0].ticketTypeId)[0].name}</td>
+                                <td>{entry.date.substring(0, entry.date.length - 23)}</td>
+                                <td>{clients.filter(x => x.email === users.filter(x => x.id === entry.insertedById)[0]?.email)[0]?.name}</td>
+                                <td>{entry.barcode}</td>
+                                <td>{rooms.filter(x => x.id === entry.roomId)[0].name}</td>
                             </tr>
                         )}
                     </tbody>

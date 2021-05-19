@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const Clients = (props) => {
-    const { handleLogOut, user, setUser, clients, getClients } = props
+    const { clients, getClients } = props
     const [addForm, setAddForm] = useState(false);
     const [name, setName] = useState();
     const [telephone, setTelephone] = useState();

@@ -27,3 +27,8 @@
 /home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/obj/Debug/net5.0/ref/FitnessAPI.dll
 /home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/obj/Debug/net5.0/FitnessAPI.pdb
 /home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/obj/Debug/net5.0/FitnessAPI.genruntimeconfig.cache
+/home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.dll
+/home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.dll
+/home/annamaria/Documents/Egyetem/Harmad ev/Masodik felev/dotNET/Fitness/FitnessAPI/bin/Debug/net5.0/System.Diagnostics.DiagnosticSource.dll

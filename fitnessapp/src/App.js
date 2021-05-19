@@ -69,10 +69,6 @@ function App() {
     setValidUser(false)
   }
 
-  // if (!validUser) {
-  //   return <App user={user} setUser={setUser} handleLogin={handleLogin} handleRegister={handleRegister} validUser={validUser}/>
-  // }
-
   return (
     <Router>
       <Switch>

@@ -165,7 +165,7 @@ const Entries = (props) => {
                                 {selectedTicket && (rooms.filter(x => x.id === ((clientTickets.filter(
                                     x => x.barcode === parseInt(barcode) &&
                                         x.ticketTypeId === ticketTypes.filter(
-                                            x => x.name === selectedTicket)[0].id)[0].roomId)))).map(ticket =>
+                                            x => x.name === selectedTicket)[0].id)[0]?.roomId)))).map(ticket =>
                                                 <option key={ticket.id}>{ticket.name}</option>)}
                             </select>
                         </label>

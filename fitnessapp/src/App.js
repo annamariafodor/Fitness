@@ -50,8 +50,16 @@ function App() {
   const handleRegister = (user) => {
     // check if the client has a membership
     let checkClient = clients.filter(x => x.email === user.email)
+    if(checkClient.length === 0){
+      alert("Before creating an account please visit one of our fitness center!") 
+      return
+    }
     // check if the email already exist in users database
     let checkUser = users.filter(x => x.email === user.email)
+    if(checkUser.length !==0){
+      alert("The email already exists!")
+      return
+    }
 
     // if the email and password is valid 
     if (checkClient.length !== 0 && checkUser.length === 0 && user.password) {

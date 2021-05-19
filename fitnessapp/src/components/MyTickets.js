@@ -7,17 +7,23 @@ const MyTickets = (props) => {
     const [myTickets, setMyTickets] = useState();
     const [ticketTypes, setTicketTypes] = useState();
     const [clientTickets, setClientTickets] = useState();
+    const [rooms, setRooms] = useState();
 
     useEffect(() => {
         getClientTickets()
         getTicketTypes()
-        // getMyTickets()
+        getRooms()
     }, [])
 
-    const getMyTickets = () => {
-        const id = clients.filter(x => x.email === user.email)[0].id
-        if (clientTickets) { setMyTickets(clientTickets.filter(x => x.clientId === id)) }
-        console.log("clientTickets: ", clientTickets)
+
+    const getRooms = () => {
+        axios.get('https://localhost:5001/rooms')
+            .then(response => {
+                setRooms(response.data)
+            })
+            .catch(error => {
+                console.log("getRooms", error)
+            })
     }
 
 
@@ -45,7 +51,7 @@ const MyTickets = (props) => {
     return (
         <div className="container-wrapper">
             <h2>My tickets</h2>
-            <Table className='table table-striped'>
+            <Table className='table table-striped table-wrapper'>
                 <thead>
                     <tr>
                         <th>Client</th>
@@ -60,7 +66,7 @@ const MyTickets = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {myTickets && ticketTypes && myTickets.map(ticket =>
+                    {myTickets && ticketTypes && rooms && myTickets.map(ticket =>
                         <tr key={ticket.id}>
                             <td>{clients.filter(x => x.id === ticket.clientId)[0].name}</td>
                             <td>{ticketTypes.filter(x => x.id === ticket.ticketTypeId)[0].name}</td>
@@ -70,7 +76,7 @@ const MyTickets = (props) => {
                             <td>{ticket.buyingPrice}</td>
                             <td>{ticket.avalabileDate.substring(0, ticket.avalabileDate.length - 15)}</td>
                             <td>{ticket.firstUsageDate.substring(0, ticket.firstUsageDate.length - 15)}</td>
-                            <td>{ticket.roomId}</td>
+                            <td>{rooms.filter(x => x.id === ticket.roomId)[0].name}</td>
                         </tr>
                     )}
                 </tbody>
